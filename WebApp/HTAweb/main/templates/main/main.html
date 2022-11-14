@@ -1,0 +1,110 @@
+{% load static %}
+<!doctype html>
+<html data-theme="light dark:dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.15.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/css/autoComplete.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css">
+  </head>
+
+  <main>
+    <nav class="navbar bg-violet-100 dark:bg-gray-900 rounded-2xl m-4 w-auto">
+      <div class="navbar-start">
+        <a href="{% url 'main:home' %}" class="btn btn-ghost btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="h-5 w-5" fill="currentcolor">
+          <path d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.5 450.5 512.3 453.1 512 455.8V472C512 494.1 494.1 512 472 512H456C454.9 512 453.8 511.1 452.7 511.9C451.3 511.1 449.9 512 448.5 512H392C369.9 512 352 494.1 352 472V384C352 366.3 337.7 352 320 352H256C238.3 352 224 366.3 224 384V472C224 494.1 206.1 512 184 512H128.1C126.6 512 125.1 511.9 123.6 511.8C122.4 511.9 121.2 512 120 512H104C81.91 512 64 494.1 64 472V360C64 359.1 64.03 358.1 64.09 357.2V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5L575.8 255.5z"/></svg>
+        </a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'main:search' %}" class="btn btn-ghost btn-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          </a>
+        {% endif %}
+      </div>
+      <div class="navbar-center">
+        <a  href="{% url 'main:home' %}" class="btn btn-ghost normal-case text-xl">HTAnalytics</a>
+      </div>
+
+      <div class="navbar-end">
+        
+        <label class="swap swap-rotate btn btn-ghost btn-circle" id="theme-toggle">
+          <!-- this hidden checkbox controls the state -->
+          <input type="checkbox" />
+          <!-- sun icon -->
+          <svg class="swap-on fill-current h-5 w-" id="theme-toggle-dark-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
+          <!-- moon icon -->
+          <svg class="swap-off fill-current h-5 w-" id="theme-toggle-light-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
+        </label>
+
+        {% if user.is_authenticated %}
+          <button class="btn btn-ghost btn-circle">
+            <div class="indicator">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+              <span class="badge badge-xs badge-primary indicator-item"></span>
+            </div>
+            </button> 
+
+            <a href="{% url 'users:logout' %}" class="btn btn-ghost btn-circle" >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="h-5 w-5">
+                <path d="M160 416H96c-17.67 0-32-14.33-32-32V128c0-17.67 14.33-32 32-32h64c17.67 0 32-14.33 32-32S177.7 32 160 32H96C42.98 32 0 74.98 0 128v256c0 53.02 42.98 96 96 96h64c17.67 0 32-14.33 32-32S177.7 416 160 416zM502.6 233.4l-128-128c-12.51-12.51-32.76-12.49-45.25 0c-12.5 12.5-12.5 32.75 0 45.25L402.8 224H192C174.3 224 160 238.3 160 256s14.31 32 32 32h210.8l-73.38 73.38c-12.5 12.5-12.5 32.75 0 45.25s32.75 12.5 45.25 0l128-128C515.1 266.1 515.1 245.9 502.6 233.4z"/></svg>
+            </a>
+        {% else %}
+          <a href="{% url 'users:login' %}" class="btn btn-ghost btn-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="h-5 w-5">
+            <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"/></svg>
+          </a>
+        {% endif %}
+      </div>
+    </nav>
+
+    <body class="gradient leading-relaxed tracking-wide flex flex-col"> <!-- class="h-screen bg-white dark:bg-slate-800"> -->
+      {% block content %}
+
+
+      {% endblock %}
+    
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
+
+      <script language="JavaScript" type="text/javascript" src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    </body>
+    
+  </main>
+
+  <footer class="footer p-10 justify-center bg-violet-100 dark:bg-gray-900">
+    <div>
+      <span class="footer-title justify-center">Authors</span> 
+      <div class="grid grid-flow-col gap-4 justify-center">
+        <div class="flex flex-row flex-wrap-reverse justify-center">
+          <div class="flex flex-col justify-center m-8 text-center">
+              <p class="text-xl font-semibold leading-tight">Adrián Heldes</p>
+              <p >hela00@vse.cz</p>
+          </div>
+          <div class="flex flex-col justify-center m-8 text-center">
+              
+              <p class="text-xl font-semibold leading-tight">Magdalena Marie Podrazilová</p>
+              <p class="dark:text-gray-400">podm08@vse.cz</p>
+          </div>
+          <div class="flex flex-col justify-center m-8 text-center">
+              
+              <p class="text-xl font-semibold leading-tight">Mário Hoz</p>
+              <p class="dark:text-gray-400">hozm02@vse.cz</p>
+          </div>
+          <div class="flex flex-col justify-center m-8 text-center">
+              <p class="text-xl font-semibold leading-tight">Zuzana Mičáková</p>
+              <p class="dark:text-gray-400">micz02@vse.cz</p>
+          </div>
+      </div>
+      </div>
+    </div>
+  </footer>
+
+  
+</html>

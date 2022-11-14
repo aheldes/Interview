@@ -1,0 +1,1 @@
+Bulkgate allows to send SMS and Viber messages.

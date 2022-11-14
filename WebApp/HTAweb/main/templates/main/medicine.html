@@ -1,0 +1,177 @@
+{% extends 'main/main.html' %}
+
+{% block content %}
+<title>
+    {{medicine.medicine_name}} - Medicine
+</title>
+<h1 class="text-5xl font-bold leading-none text-center">
+    {{medicine.medicine_name}}
+</h1>
+<section class="py-3">
+    <div class="container p-6 mx-auto space-y-8">
+        
+        <div class="grid gap-x-10 gap-y-8 lg:grid-cols-12 place-content-center">
+            <h2 class="text-3xl leading-none text-left col-start-2 col-end-12">Basic information</h2>
+
+            <article class="transition col-start-2 col-end-12 grid place-items-center
+            bg-violet-100 dark:bg-gray-800 rounded-2xl">
+                <h2 class="text-2xl font-bold leading-none text-center pt-3"></h2>
+
+                </h2>
+                <div class="flex-1 p-6 text-center grid place-content-center">
+                    <table class="text-xs grid place-items-center">
+                        <thead>
+                            <tr class="text-center">
+                                <th class="px-2 py-2">Status</th>
+                                <th class="px-2 py-2">Generic</th>
+                                <th class="px-2 py-2">Biosimilar</th>
+                                <th class="px-2 py-2">Holder</th>
+                                <th class="px-2 py-2">Authorisation Date</th>
+                                <th class="px-2 py-2">Revision date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td class="px-2 py-2">  
+                                    {% if medicine.authorisation_status == 'Authorised' %}
+                                        <div class="tooltip hover:tooltip-open tooltip-accent" data-tip="{{medicine.authorisation_status}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-green-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </div>
+                                    {% else %}
+                                        <div class="tooltip hover:tooltip-open tooltip-error" data-tip="{{medicine.authorisation_status}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-red-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                <td class="px-2 py-2">
+                                        {% if medicine.generic %}
+                                        <div class="grid place-items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </div>
+                                        
+                                        {% else %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>{% endif %}</div>
+                                </td>
+                                <td class="px-2 py-2">
+                                    {% if medicine.generic %}
+                                    <div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg></div>
+                                    {% else %}
+                                    <div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg></div>
+                                    {% endif %}
+                                </td>
+                                <td class="px-2 py-2">  <p>{{medicine.marketing_authorisation_name}}</p> </td>
+                                <td class="px-2 py-2">  <p>{{medicine.marketing_authorisation_date}}</p>  </td>
+                                <td class="px-2 py-2">  <p>{{medicine.revision_date}}</p>  </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </article> 
+
+            <h2 class="text-3xl leading-none text-left col-start-2 col-end-12">All information</h2>
+
+            <article class="transition lg:col-start-2 lg:col-end-12
+            bg-violet-100 dark:bg-gray-800 rounded-2xl">
+
+                <div class="grid grid-cols-4 gap-4 text-xs text-center p-2">
+                    <div class="font-bold col-span-2">therapeutic_area</div>
+                    <div class="col-span-2">{{medicine.therapeutic_area}}</div>
+                    <div class="font-bold col-span-2">international_non_proprietary_name</div>
+                    <div class="col-span-2">{{medicine.international_non_proprietary_name}}</div>
+                    <div class="font-bold col-span-2">active_substance</div>
+                    <div class="col-span-2">{{medicine.active_substance}}</div>
+                    <div class="font-bold col-span-2">product_number</div>
+                    <div class="col-span-2">{{medicine.product_number}}</div>
+                    <div class="font-bold col-span-2">patient_safety</div>
+                    <div class="col-span-2">{% if medicine.patient_safety %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% else %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% endif %}</div>
+                    <div class="font-bold col-span-2">authorisation_status</div>
+                    <div class="col-span-2">{{medicine.authorisation_status}}</div>
+                    <div class="font-bold col-span-2">ATC_code</div>
+                    <div class="col-span-2">{{medicine.ATC_code}}</div>
+                    <div class="font-bold col-span-2">additional_monitoring</div>
+                    <div class="col-span-2 content-center">{% if medicine.additional_monitoring %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% else %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% endif %}</div>
+                    <div class="font-bold col-span-2">conditional_approval</div>
+                    <div class="col-span-2">{% if medicine.conditional_approval %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% else %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% endif %}</div>
+                    <div class="font-bold col-span-2">exceptional_circumstances</div>
+                    <div class="col-span-2">{% if medicine.exceptional_circumstances %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% else %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% endif %}</div>
+                    <div class="font-bold col-span-2">accelerated_assessment</div>
+                    <div class="col-span-2">{% if medicine.accelerated_assessment %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% else %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% endif %}</div>
+                    <div class="font-bold col-span-2">orphan_medicine</div>
+                    <div class="col-span-2">{% if medicine.orphan_medicine %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% else %}<div class="grid place-items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-violet-500" viewBox="0 0 24 24" stroke-width="2" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg></div>{% endif %}</div>
+                    <div class="font-bold col-span-2">marketing_authorisation_date</div>
+                    <div class="col-span-2">{{medicine.marketing_authorisation_date}}</div>
+                    <div class="font-bold col-span-2">refusal_date</div>
+                    <div class="col-span-2">{{medicine.refusal_date}}</div>
+                    <div class="font-bold col-span-2">marketing_authorisation_name</div>
+                    <div class="col-span-2">{{medicine.marketing_authorisation_name}}</div>
+                    <div class="font-bold col-span-2">human_pharmacotherapeutic_group</div>
+                    <div class="col-span-2">{{medicine.human_pharmacotherapeutic_group}}</div>
+                    <div class="font-bold col-span-2">vet_pharmacotherapeutic_group</div>
+                    <div class="col-span-2">{{medicine.vet_pharmacotherapeutic_group}}</div>
+                    <div class="font-bold col-span-2">date_of_opinion</div>
+                    <div class="col-span-2">{{medicine.date_of_opinion}}</div>
+                    <div class="font-bold col-span-2">decision_date</div>
+                    <div class="col-span-2">{{medicine.decision_date}}</div>
+                    <div class="font-bold col-span-2">revision_number</div>
+                    <div class="col-span-2">{{medicine.revision_number}}</div>
+                    <div class="font-bold col-span-2">condition_indication</div>
+                    <div class="col-span-2">{{medicine.condition_indication}}</div>
+                    <div class="font-bold col-span-2">species</div>
+                    <div class="col-span-2">{{medicine.species}}</div>
+                    <div class="font-bold col-span-2">ATCvet_code</div>
+                    <div class="col-span-2">{{medicine.ATCvet_code}}</div>
+                    <div class="font-bold col-span-2">first_published</div>
+                    <div class="col-span-2">{{medicine.first_published}}</div>
+                    <div class="font-bold col-span-2">revision_date</div>
+                    <div class="col-span-2">{{medicine.revision_date}}</div>
+                    <div class="font-bold col-span-2">url</div>
+                    <div class="col-span-2"><a class="text-orange-500 underline" href="{{medicine.url}}">{{medicine.url}}</a></div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+
+
+
+
+

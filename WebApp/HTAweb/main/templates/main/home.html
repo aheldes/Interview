@@ -1,0 +1,79 @@
+{% extends 'main/main.html' %}
+{% load static %}
+
+{% block content %}
+<title>
+  Home
+</title>
+    <section class="pb-6">
+      <div class="container p-6 mx-auto space-y-8 bg-violet-100 dark:bg-gray-900 rounded-2xl">
+        <h2 class="w-full my-2 text-5xl font-black leading-tight text-center">
+            Heatlh Technology Assessment ultimate tool for market access professionals.
+        </h2>
+        <div class="w-full mb-8">
+        </div>
+
+        <div class="flex flex-wrap pt-4">
+          <div class="w-5/6 sm:w-1/2">
+            <h3 class="text-3xl font-bold leading-none mb-3">
+              Search 
+            </h3>
+            <p class=" mb-8">
+            Look for a specific active substance, medicine, or therapeutic area with an intelligent search bar.<br /><br />
+            </p>
+          </div>
+          <div class="w-full sm:w-1/2">
+              <img src="{% static 'images/test.png' %}" alt="Demo" class="rounded-2xl"/>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap flex-col-reverse sm:flex-row">
+          <div class="w-full sm:w-1/2 p-6 mt-6">
+              <img src="{% static 'images/test.png' %}" alt="Demo" />
+          </div>
+          <div class="w-full sm:w-1/2 p-6 mt-6">
+            <div class="align-middle">
+              <h3 class="text-3xl font-bold leading-none mb-3">
+                Active substance overview
+              </h3>
+              <p class=" mb-8">
+                Get a complex understanding for the current market situation of the chosen active substance. 
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap">
+          <div class="w-5/6 sm:w-1/2 p-6">
+            <h3 class="text-3xl font-bold leading-none mb-3">
+              Medicine details
+            </h3>
+            <p class=" mb-8">
+              Quickly recognize all registered medicines of your competitors and work with detailed information about them. <br /><br />
+            </p>
+          </div>
+          <div class="w-full sm:w-1/2 p-6">
+              <img src="{% static 'images/test.png' %}" alt="Demo" />
+          </div>
+        </div>
+
+        <div class="flex flex-wrap flex-col-reverse sm:flex-row">
+          <div class="w-full sm:w-1/2 p-6 mt-6">
+              <img src="{% static 'images/test.png' %}" alt="Demo" />
+          </div>
+          <div class="w-full sm:w-1/2 p-6 mt-6">
+            <div class="align-middle">
+              <h3 class="text-3xl font-bold leading-none mb-3">
+                PDF analysis
+              </h3>
+              <p class=" mb-8">
+                Save time with quick summaries of the HTA assessments from the most relevant agencies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+{% endblock %}
